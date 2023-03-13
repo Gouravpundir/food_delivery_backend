@@ -1,17 +1,53 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+const express = require("express");
+const route = require("./routes/route.js");
+const displayRoute = require("./routes/display.js");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
+const app = express();
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://food-delivery-rho.vercel.app/");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+app.use(express.json());
+
+mongoose.set("strictQuery", true);
+
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("MongoDb is connected");
+    const fetched_data = mongoose.connection.db.collection('foods');
+    fetched_data.find({}).toArray((err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        global.foods = data;
+      }
+    });
+    const foodCategory = mongoose.connection.db.collection('category_name');
+    foodCategory.find({}).toArray((err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        global.foodCategory = data;
+      }
+    });
+  })
+  .catch((err) => console.log(err));
+
+app.use("/", route);
+app.use("/api", displayRoute);
+
+app.listen(process.env.PORT, function () {
+  console.log("Express app running on port " + process.env.PORT);
+});
