@@ -67,9 +67,8 @@ export default function Home() {
                     .map((filterItem) => (
                       <div key={filterItem._id} className="col-12 col-md-6 col-lg-3">
                         <Card 
-                        foodName={filterItem.name} 
-                        options={filterItem.options} 
-                        imageSrc={filterItem.image} 
+                        foodItem={filterItem} 
+                        options={filterItem.options}
                         ></Card >
                       </div>
                     ))

@@ -42,77 +42,68 @@ export default function Signup() {
   };
 
   return (
-    <>
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              value={credential.name}
-              onChange={onChange}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Email address
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              name="email"
-              value={credential.email}
-              onChange={onChange}
-              required
-            />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
-            </div>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="exampleInputPassword1"
-              name="password"
-              value={credential.password}
-              onChange={onChange}
-              minLength="8"
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Address
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="geoLocation"
-              value={credential.geoLocation}
-              onChange={onChange}
-              required
-            />
-          </div>
-          <button type="submit" className="m-3 btn btn-primary">
-            Submit
-          </button>
-          <Link to="/login" className="m-3 btn btn-danger">
-            Already a user
-          </Link>
-        </form>
-      </div>
-    </>
+    <div className="container">
+      <form onSubmit={handleSubmit} className="form-signup">
+        <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
+        <div className="form-floating">
+          <input
+            type="text"
+            className="form-control"
+            name="name"
+            value={credential.name}
+            onChange={onChange}
+            placeholder="Name"
+            required
+          />
+          <label htmlFor="name">Name</label>
+        </div>
+        <div className="form-floating">
+          <input
+            type="email"
+            className="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="email"
+            value={credential.email}
+            onChange={onChange}
+            placeholder="Email address"
+            required
+          />
+          <label htmlFor="exampleInputEmail1">Email address</label>
+        </div>
+        <div className="form-floating">
+          <input
+            type="password"
+            className="form-control"
+            id="exampleInputPassword1"
+            name="password"
+            value={credential.password}
+            onChange={onChange}
+            minLength="8"
+            placeholder="Password"
+            required
+          />
+          <label htmlFor="exampleInputPassword1">Password</label>
+        </div>
+        <div className="form-floating">
+          <input
+            type="text"
+            className="form-control"
+            name="geoLocation"
+            value={credential.geoLocation}
+            onChange={onChange}
+            placeholder="Address"
+            required
+          />
+          <label htmlFor="exampleInputPassword1">Address</label>
+        </div>
+        <button type="submit" className="w-100 btn btn-lg btn-primary">
+          Sign up
+        </button>
+        <p className="mt-3 mb-3">
+          Already have an account? <Link to="/login">Log in</Link>
+        </p>
+      </form>
+    </div>
   );
 }

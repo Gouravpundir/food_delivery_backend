@@ -1,6 +1,7 @@
+import '../style/login.css'
 import { useState } from "react";
 import React from "react";
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [credential, setCredentials] = useState({
@@ -29,8 +30,8 @@ export default function Login() {
       alert("Enter valid credentials");
     }
     if (data.status) {
-      localStorage.setItem('data',data.token);
-      navigate('/');
+      localStorage.setItem("data", data.token);
+      navigate("/");
     }
   };
 
@@ -42,49 +43,47 @@ export default function Login() {
   };
   return (
     <>
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-         
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Email address
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              name="email"
-              value={credential.email}
-              onChange={onChange}
-              required
-            />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
+      <h1 className="text-center mt-3 mb-4 p-2 fs-2 fw-bold">Login Page</h1>
+      <div className="login d-flex justify-content-center">
+        <div className="w-50">
+          <form onSubmit={handleSubmit}>
+            <div className="form-floating mb-3">
+              <input
+                type="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                name="email"
+                value={credential.email}
+                onChange={onChange}
+                required
+              />
+              <label htmlFor="exampleInputEmail1">Email address</label>
+              <div id="emailHelp" className="form-text">
+                We'll never share your email with anyone else.
+              </div>
             </div>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="exampleInputPassword1"
-              name="password"
-              value={credential.password}
-              onChange={onChange}
-              minLength="8"
-              required
-            />
-          </div>
-          <button type="submit" className="m-3 btn btn-primary">
-            Submit
-          </button>
-          <Link to="/createUser" className="m-3 btn btn-danger">
-            I'm a new user 
-          </Link>
-        </form>
+            <div className="form-floating mb-3">
+              <input
+                type="password"
+                className="form-control"
+                id="exampleInputPassword1"
+                name="password"
+                value={credential.password}
+                onChange={onChange}
+                minLength="8"
+                required
+              />
+              <label htmlFor="exampleInputPassword1">Password</label>
+            </div>
+            <button type="submit" className="btn btn-primary btn-sm">
+              Submit
+            </button>
+            <Link to="/createUser" className="btn btn-danger btn-sm ms-3">
+              I'm a new user
+            </Link>
+          </form>
+        </div>
       </div>
     </>
   );
