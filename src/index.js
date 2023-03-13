@@ -20,7 +20,7 @@ app.use(express.json());
 mongoose.set("strictQuery", true);
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect("mongodb+srv://gourav-pundir:7HztUn9Bz3zFfxDT@cluster0.tnf1yk0.mongodb.net/gourav-22", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
