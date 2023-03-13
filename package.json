@@ -4,7 +4,7 @@
   "description": "creating food delivery app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "node src/index.js"
   },
   "keywords": [
     "food"
